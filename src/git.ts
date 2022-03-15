@@ -44,16 +44,11 @@ export async function getCommits(before: number, after: number) {
             '--',
             './vplan.json',
         ],
-        stderr: 'piped',
         stdout: 'piped',
         cwd: gitPath,
     });
 
-    const [_, stdout] = await Promise.all([
-        p.status(),
-        p.output(),
-        p.stderrOutput(),
-    ]);
+    const [_, stdout] = await Promise.all([p.status(), p.output()]);
     p.close();
     const lines = new TextDecoder().decode(stdout).split('\n');
     console.log(JSON.stringify(lines));
