@@ -17,7 +17,8 @@ RUN apk --no-cache add \
 # Configure git
 RUN git config --global user.email "git-history@lernsax.de" \
     && git config --global user.name "Git History Bot" \
-    && git config --global pull.ff only
+    && git config --global pull.ff only \
+    && mkdir ./git
 
 # Modules
 COPY ./src/deps.ts ./src/deps.ts
@@ -25,5 +26,6 @@ RUN deno cache ./src/deps.ts
 
 # Copy all files -> KEEP .dockerignore UP TO DATE
 COPY ./src ./src
+
 
 CMD [ "deno", "run", "-A", "/app/src/mod.ts" ]
