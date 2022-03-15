@@ -42,10 +42,11 @@ const handler = async (request: Request): Promise<Response> => {
         return new Response('Missing parameters', { status: 400 });
     }
 
-    await initRepo();
-
-    return new Response(`${(await getCommits(before, after)).code}`, {
+    return new Response(JSON.stringify(await getCommits(before, after)), {
         status: 200,
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
 };
 
