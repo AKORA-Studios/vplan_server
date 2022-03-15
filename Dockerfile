@@ -24,8 +24,5 @@ RUN deno cache ./src/deps.ts
 # Copy all files -> KEEP .dockerignore UP TO DATE
 COPY ./src ./src
 
-# Volumes
-VOLUME [ "/app/git", "/app/files" ]
-
 COPY ./start.sh ./start.sh
 CMD [ "deno", "run", "-A", "/app/src/mod.ts" ]
