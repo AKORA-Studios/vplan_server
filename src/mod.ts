@@ -15,7 +15,6 @@ function isTimestamp(str: string) {
 
 const handler = async (request: Request): Promise<Response> => {
     const searchParams = new URLSearchParams(request.url.split('?')[1]);
-    console.log(searchParams);
     const rawTimestamp = searchParams.get('timestamp'),
         rawBefore = searchParams.get('before'),
         rawAfter = searchParams.get('after');

@@ -39,7 +39,7 @@ export async function getCommits(before: number, after: number) {
             '--follow',
             '--pretty="%H-%at"',
             '--',
-            '.\vplan.json',
+            './vplan.json',
             `--before=${before + 1}`,
             `--after=${after - 1}`,
         ],
