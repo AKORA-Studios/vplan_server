@@ -35,6 +35,7 @@ export async function initRepo() {
 export async function getCommits(before: number, after: number) {
     const p = Deno.run({
         cmd: [
+            'git',
             'log',
             '--follow',
             '--pretty="%H-%at"',
