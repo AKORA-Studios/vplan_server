@@ -44,12 +44,18 @@ export async function getCommits(before: number, after: number) {
             `--before=${before + 1}`,
             `--after=${after - 1}`,
         ],
+        stderr: 'piped',
         stdout: 'piped',
         cwd: gitPath,
     });
 
-    const [_, output] = await Promise.all([p.status(), p.output()]);
-    const lines = new TextDecoder().decode(output).split('\n');
+    const [_, stdout] = await Promise.all([
+        p.status(),
+        p.output(),
+        p.stderrOutput(),
+    ]);
+    p.close();
+    const lines = new TextDecoder().decode(stdout).split('\n');
     return lines.map((l) => ({
         hash: l.split('-')[0],
         url: `${config.GIT_URL}/raw/commit/${l.split('-')[0]}/vplan.json`,
