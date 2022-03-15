@@ -16,13 +16,13 @@ function cloneGit() {
 
 export async function initRepo() {
     //Pull if already cloned
-    const { success } = await execGit('pull');
+    const { success } = await execGit('pull').catch();
 
     if (!success) {
-        const { success } = await cloneGit();
+        const { success } = await cloneGit().catch();
         if (!success) {
             Deno.removeSync(gitPath, { recursive: true });
-            const { success } = await cloneGit();
+            const { success } = await cloneGit().catch();
             if (!success) {
                 throw new Error('Git Failed');
             }
