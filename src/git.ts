@@ -7,22 +7,24 @@ function execGit(...args: string[]) {
     return Deno.run({
         cmd: ['git', ...args],
         cwd: gitPath,
-    }).status();
+    })
+        .status()
+        .catch();
 }
 
 function cloneGit() {
-    return execGit('clone', '--sparse', '--depth=1 ', config.GIT_URL, gitPath);
+    return execGit('clone', '--sparse', '--depth=1', config.GIT_URL, gitPath);
 }
 
 export async function initRepo() {
     //Pull if already cloned
-    const { success } = await execGit('pull').catch();
+    const { success } = await execGit('pull');
 
     if (!success) {
-        const { success } = await cloneGit().catch();
+        const { success } = await cloneGit();
         if (!success) {
             Deno.removeSync(gitPath, { recursive: true });
-            const { success } = await cloneGit().catch();
+            const { success } = await cloneGit();
             if (!success) {
                 throw new Error('Git Failed');
             }
