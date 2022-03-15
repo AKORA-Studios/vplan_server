@@ -6,13 +6,11 @@ ENV PORT 3000
 EXPOSE 3000
 
 # Install git as dependency
-RUN apk fix
-RUN apk --no-cache add \
+RUN apk fix \
+    && apk --no-cache add \
     git=2.30.2-r0 \
-    git-lfs=2.13.1-r0 \
     less=563-r0 \
-    openssh=8.4_p1-r4 \
-    && git lfs install
+    openssh=8.4_p1-r4 
 
 # Configure git
 RUN git config --global user.email "git-history@lernsax.de" \
