@@ -16,11 +16,6 @@ function cloneGit() {
 
 export async function initRepo() {
     //Pull if already cloned
-    await execGit(
-        'config',
-        `lfs.${config.GIT_URL}.git/info/lfs.locksverify`,
-        'true',
-    );
     const { success } = await execGit('pull');
 
     if (!success) {
