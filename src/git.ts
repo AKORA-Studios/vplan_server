@@ -39,7 +39,7 @@ export async function getCommits(before: number, after: number) {
             'log',
             `--before=${before + 1}`,
             `--after=${after - 1}`,
-            '--pretty="%H-%at"',
+            '--pretty=%H-%at',
             '--follow',
             '--',
             './vplan.json',
@@ -51,7 +51,7 @@ export async function getCommits(before: number, after: number) {
     const [_, stdout] = await Promise.all([p.status(), p.output()]);
     p.close();
     const lines = new TextDecoder().decode(stdout).split('\n');
-    console.log(JSON.stringify(lines));
+    lines.pop(); //Remove Last newline
     return lines.map((l) => ({
         hash: l.split('-')[0],
         url: `${config.GIT_URL}/raw/commit/${l.split('-')[0]}/vplan.json`,
