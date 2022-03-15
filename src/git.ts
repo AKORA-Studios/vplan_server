@@ -56,6 +56,7 @@ export async function getCommits(before: number, after: number) {
     ]);
     p.close();
     const lines = new TextDecoder().decode(stdout).split('\n');
+    console.log(JSON.stringify(lines));
     return lines.map((l) => ({
         hash: l.split('-')[0],
         url: `${config.GIT_URL}/raw/commit/${l.split('-')[0]}/vplan.json`,
