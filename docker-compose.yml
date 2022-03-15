@@ -1,0 +1,22 @@
+networks:
+    lernsax:
+      name: lernsax
+      external: true
+
+services:
+  app:
+    build: .
+    container_name: lernsax_history
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./files:/app/files:ro
+      - lernsax_git:/app/git
+    networks:
+      - lernsax
+
+volumes:
+  lernsax_git:
+    name: lernsax_git
+    external: true

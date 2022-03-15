@@ -1,0 +1,13 @@
+# Build
+dist/
+maps/
+node_modules/
+target/
+
+# Secrets
+**/*.env
+
+# Runtime
+data.json
+files/
+git/

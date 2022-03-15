@@ -1,0 +1,1 @@
+git log --follow --pretty="%H - %at" -- .\vplan.json

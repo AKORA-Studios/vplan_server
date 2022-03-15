@@ -1,0 +1,20 @@
+# Configs
+.prettierrc
+*.env
+.gitattributes
+.gitignore
+
+# Runtime
+files/
+git/
+data.json
+
+# Docker
+*.yml
+Dockerfile
+
+
+# Build
+node_modules/
+maps/
+dist/
