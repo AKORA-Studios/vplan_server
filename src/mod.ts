@@ -14,6 +14,7 @@ function isTimestamp(str: string) {
 }
 
 const handler = async (request: Request): Promise<Response> => {
+    await initRepo();
     const searchParams = new URLSearchParams(request.url.split('?')[1]);
     const rawTimestamp = searchParams.get('timestamp'),
         rawBefore = searchParams.get('before'),
